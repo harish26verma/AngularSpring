@@ -13,7 +13,7 @@
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		
+
 		<!-- make the account lee secure from this link https://myaccount.google.com/u/1/lesssecureapps?pli=1&pageId=none -->
 
 
@@ -45,6 +45,7 @@
 		in the /WEB-INF/ Folder -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2"></property>
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
@@ -59,4 +60,23 @@
 			</props>
 		</property>
 	</bean>
+
+	<!-- freemarker view resolver -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath"
+			value="/WEB-INF/views/ftl" />
+	</bean>
+
+	<!-- View resolvers can also be configured with ResourceBundles or XML files. 
+		If you need different view resolving based on Locale, you have to use the 
+		resource bundle resolver. -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="order" value="1"></property>
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+	</bean>
+
 </beans>

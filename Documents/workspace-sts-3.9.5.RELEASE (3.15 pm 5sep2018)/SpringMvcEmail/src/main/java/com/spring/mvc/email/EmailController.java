@@ -2,6 +2,10 @@ package com.spring.mvc.email;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.internet.MimeMessage;
@@ -20,29 +24,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import freemarker.template.Configuration;
+
 @Controller
 public class EmailController {
 
 	static String emailToRecipient, emailSubject, emailMessage;
-	
 
-	 
-	static  String emailFromRecipient ="white.feathers.happy@gmail.com";
-		static ModelAndView modelViewObj;
+	static String emailFromRecipient = "harish26verma@gmail.com";
+	static ModelAndView modelViewObj;
 
 	@Autowired
 	private JavaMailSender mailSenderObj;
 
 	@RequestMapping(value = { "/", "emailForm" }, method = RequestMethod.GET)
 	public ModelAndView showEmailForm(ModelMap model) {
-		modelViewObj = new ModelAndView("emailForm");
+		modelViewObj = new ModelAndView("templateflt");
+		// code to list the data from AxisRooms
+		AxisRoomsDataController roomList=new AxisRoomsDataController();
+	 List<AxisRoom> AxisRoomsListArray = roomList.getAxisRooms();
+	 Map<String, Object> root = new HashMap<String, Object>();
+	    root.put( "AxisRoomsListArray", AxisRoomsListArray );
+	 	
 		return modelViewObj;
 	}
 
 	// This Method Is Used To Prepare The Email Message And Send It To The Client
-@RequestMapping(value = "sendEmail", method = RequestMethod.POST)
+	@RequestMapping(value = "sendEmail", method = RequestMethod.POST)
 	public ModelAndView sendEmailToClient(HttpServletRequest request,
-		final @RequestParam CommonsMultipartFile attachFileObj) {
+			final @RequestParam CommonsMultipartFile attachFileObj) {
 		// Reading Email Form Input Parameters
 		emailSubject = request.getParameter("subject");
 		emailMessage = request.getParameter("message");
@@ -62,7 +72,7 @@ public class EmailController {
 				mimeMsgHelperObj.setSubject(emailSubject);
 
 				// Determine If There Is An File Upload. If Yes, Attach It To The Client Email
-			if ((attachFileObj != null) && (attachFileObj.getSize() > 0) && (!attachFileObj.equals(""))) {
+				if ((attachFileObj != null) && (attachFileObj.getSize() > 0) && (!attachFileObj.equals(""))) {
 					System.out.println("\nAttachment Name?= " + attachFileObj.getOriginalFilename() + "\n");
 					mimeMsgHelperObj.addAttachment(attachFileObj.getOriginalFilename(), new InputStreamSource() {
 						public InputStream getInputStream() throws IOException {
@@ -72,7 +82,7 @@ public class EmailController {
 				} else {
 					System.out.println("\nNo Attachment Is Selected By The User. Sending Text Email!\n");
 				}
-		}
+			}
 		});
 		System.out.println("\nMessage Send Successfully.... Hurrey!\n");
 

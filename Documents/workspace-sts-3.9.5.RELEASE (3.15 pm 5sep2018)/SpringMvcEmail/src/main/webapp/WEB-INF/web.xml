@@ -2,6 +2,8 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <display-name>Spring Mvc Email Example</display-name>
    
+   
+   
     <!-- Spring Configuration - Processes Application Requests -->
     <servlet>
         <servlet-name>SpringController</servlet-name>
@@ -19,6 +21,6 @@
     
     <!-- Welcome File List -->
     <welcome-file-list>
-    	<welcome-file>emailForm.jsp</welcome-file>
+    	<welcome-file>emailForm</welcome-file>
   	</welcome-file-list>
 </web-app>

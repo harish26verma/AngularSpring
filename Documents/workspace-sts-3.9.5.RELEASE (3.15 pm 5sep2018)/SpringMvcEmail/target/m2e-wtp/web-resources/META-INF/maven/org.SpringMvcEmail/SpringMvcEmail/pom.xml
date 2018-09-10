@@ -6,8 +6,13 @@
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>SpringMvcEmail Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <url>http://maven.apache.o	rg</url>
   <dependencies>
+
+
+
+
+  
   <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 <dependency>
     <groupId>javax.servlet</groupId>
@@ -82,6 +87,11 @@
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.freemarker</groupId>
+    	<artifactId>freemarker</artifactId>
+    	<version>2.3.28</version>
     </dependency>
   </dependencies>
   <build>
