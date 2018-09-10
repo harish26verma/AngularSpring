@@ -2,9 +2,12 @@ package com.spring.mvc.email;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
+
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -21,9 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class EmailController {
 
 	static String emailToRecipient, emailSubject, emailMessage;
-	static final String emailFromRecipient = "harish26verma@yahoo.com";
+	
 
-	static ModelAndView modelViewObj;
+	 
+	static  String emailFromRecipient ="white.feathers.happy@gmail.com";
+		static ModelAndView modelViewObj;
 
 	@Autowired
 	private JavaMailSender mailSenderObj;
